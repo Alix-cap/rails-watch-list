@@ -10,4 +10,6 @@ class List < ApplicationRecord
 
   def destroy_associated_bookmarks
     bookmarks.destroy_all
+  end
+  
 end
