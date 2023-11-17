@@ -1,13 +1,16 @@
 <h1><%= @list.name %></h1>
 
 <h2>Movies in this list:</h2>
-<ul>
-  <% @list.movies.each do |movie| %>
-    <li><%= movie.title %></li>
-    <li><%= movie.overview %></li>
-    <li><%= movie.poster_url %></li>
-    <li><%= movie.rating %></li>
-  <% end %>
-</ul>
+
+<% @list.movies.each do |movie| %>
+  <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+  <%= image_tag movie.poster_url, alt: movie.title %>
+  <li><%= movie.title %></li>
+  <li><%= movie.overview %></li>
+  <%# <li><%= movie.poster_url %>
+  <li><%= movie.rating %></li>
+<% end %>
+
+<%= link_to "Ajouter un bookmark", new_list_bookmark_path(@list) %>
 
 <%= link_to 'Back to Lists', lists_path %>
